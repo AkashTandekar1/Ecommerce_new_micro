@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import NxWelcome from './nx-welcome';
+import Header from 'libs/header/src/lib/header'
 
 const StyledApp = styled.div`
   // Your style here
@@ -9,7 +10,8 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <StyledApp>
-      <NxWelcome title="ecommerce" />
+      {/* <NxWelcome title="ecommerce" /> */}
+       <Header/>
     </StyledApp>
   );
 }
