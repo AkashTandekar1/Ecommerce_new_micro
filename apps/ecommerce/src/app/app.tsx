@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import EcommerceApp from 'libs/ecommerce-app/src/lib/ecommerce-app'
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import NxWelcome from './nx-welcome';
 
 const StyledApp = styled.div`
   // Your style here
@@ -9,7 +10,10 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <StyledApp>
-      <NxWelcome title="ecommerce" />
+    
+      <EcommerceApp/>
+   
+
     </StyledApp>
   );
 }
