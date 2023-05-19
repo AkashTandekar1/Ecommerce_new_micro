@@ -48,7 +48,7 @@ export function PaymentGateway(props: PaymentGatewayProps) {
   const [carddata, setcardData] = useState<string>('');
   const [success, setSucess] = useState<boolean>(false);
 
-  const onToken = (token: PaymentGatewayProps) => {
+  const onToken:any = (token: PaymentGatewayProps) => {
     console.log('Token generated' + token);
 
     const {

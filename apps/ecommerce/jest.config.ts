@@ -8,4 +8,7 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/ecommerce',
+  setupFilesAfterEnv: [
+    "<rootDir>/support/setupTests.js"
+ ],
 };

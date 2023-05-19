@@ -37,7 +37,7 @@ export interface akash {
   id: number;
 }
 
-export const CardDetails = (props: CardDetailsProps) => {
+export const CardDetails = () => {
   const [data, setData] = useState<CardDetailsProps[]>();
 
   const { id }= useParams();

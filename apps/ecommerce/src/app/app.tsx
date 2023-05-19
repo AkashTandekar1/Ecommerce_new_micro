@@ -16,12 +16,12 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <StyledApp>
-      <EcommerceApp />
+      <EcommerceApp data-testid="Ecommercecomponent"/>
 
-      <Chatbot />
+      <Chatbot  data-testid="Chatbotcomponent"/>
       <Routes>
-        <Route path="/" element={<Cards id={0} rname={''} imgdata={''} address={''} delimg={''} somedata={''} price={0} rating={''} arrimg={''} qnty={0} />}></Route>
-        <Route path="/cartdetails/:id" element={<CardDetails id={0} rname={''} imgdata={''} address={''} delimg={''} somedata={''} price={0} rating={''} arrimg={''} qnty={0} />}></Route>
+        <Route path="/" element={<Cards/>}></Route>
+        <Route path="/cartdetails/:id" element={<CardDetails/>}></Route>
         <Route path="/invoice" element={<Invoice />}></Route>
       </Routes>
     </StyledApp>

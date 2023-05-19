@@ -7,7 +7,6 @@ import ReactToPrint from "react-to-print";
 import { StyledInvoiceContainer,StyledPrintContainer,StyledInvoiceBoxContainer,StyledTableContainer,
   StyledTableData }
  from './invoice.styles'
-import "./Invoiceapp.css";
 
 export interface InvoiceProps {
   id: number;
@@ -23,7 +22,7 @@ export interface InvoiceProps {
 }
 
 export default function Invoice() {
-  let componentRef = useRef();
+  let componentRef:any = useRef();
   const getdata = useSelector((state:any) => state.CartReducer.carts);
   console.log(getdata);
 

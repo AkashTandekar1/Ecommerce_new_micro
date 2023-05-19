@@ -9,7 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { ADD } from '../action/action';
 import Cardsdata from '../cardsdata/CardsData';
 
-import '../App.css';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 export interface CardsProps {
@@ -33,7 +33,7 @@ const StyleShowCardsChildren = styled.div``;
 const Styledpagination = styled.div``;
 
 const StyledReactPaginate = styled.div``;
-export function Cards(props: CardsProps) {
+export function Cards() {
   const dispatch = useDispatch();
 
   const send = (e: CardsProps) => {

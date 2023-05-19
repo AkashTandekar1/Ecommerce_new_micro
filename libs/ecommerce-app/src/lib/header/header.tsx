@@ -41,7 +41,7 @@ const StyledHeaderTable = styled.div`
   z-index: 999 !important;
 `;
 
-export const Header = (props: HeaderProps) => {
+export const Header = () => {
   const getdata = useSelector((state:any) => state.CartReducer.carts);
   console.log(getdata);
 
@@ -51,11 +51,11 @@ export const Header = (props: HeaderProps) => {
   const componentRef = useRef();
 
   const handlePrint = useReactToPrint({
-    content: () => componentRef?.current,
+    content: () => componentRef.current as any,
   });
 
   const [open, setOpen] = useState<boolean>(false);
-  const anchorRef = useRef (null);
+  const anchorRef:any = useRef (null);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);

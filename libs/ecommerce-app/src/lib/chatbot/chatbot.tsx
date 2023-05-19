@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
+// @ts-ignore
 import ChatBot from 'react-simple-chatbot';
-import '../Styles/Chatbotdesign.css';
 import { ThemeProvider } from 'styled-components';
 
 export interface ChatbotProps {}
