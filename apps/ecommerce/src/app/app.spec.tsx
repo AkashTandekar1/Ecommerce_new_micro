@@ -1,51 +1,83 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import App from './app';
 
-import EcommerceApp from 'libs/ecommerce-app/src/lib/ecommerce-app';
+import React from 'react';
+import '@testing-library/jest-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import CardDetails from 'libs/ecommerce-app/src/lib/card-details/card-details';
-import Cards from 'libs/ecommerce-app/src/lib/cards/cards';
-import Chatbot from 'libs/ecommerce-app/src/lib/chatbot/chatbot';
-import Invoice from 'libs/ecommerce-app/src/lib/invoice/invoice';
+jest.mock('libs/ecommerce-app/src/lib/cards/cards', () => {
+  return {
+    Cards: () => <div data-testid="cards-component">Cards Component</div>,
+  };
+});
 
+jest.mock('libs/ecommerce-app/src/lib/card-details/card-details', () => {
+  return {
+    CardDetails: () => (
+      <div data-testid="cards-details-component">Cards Detail Component</div>
+    ),
+  };
+});
 
-import React from 'react'
-import '@testing-library/jest-dom'
-import {BrowserRouter, MemoryRouter} from 'react-router-dom'
+jest.mock('libs/ecommerce-app/src/lib/invoice/invoices', () => {
+  return {
+    Invoice: () => <div data-testid="invoice-component">Invoice Component</div>,
+  };
+});
 
 describe('App', () => {
-  it('should render successfully', () => {
+  test('should render successfully', () => {
     const { baseElement } = render(<App />);
     expect(baseElement).toBeTruthy();
   });
 
-  it('Ecommercecomponent component should be rendered', () => {
+  test('Ecommercecomponent component should be rendered', () => {
     const component = render(<App />);
     console.log(component);
     const childElement = component.findByTestId('Ecommercecomponent');
-    expect(childElement).toBeTruthy();
+    expect(childElement).toBeInTheDocument();
   });
 
-  it('Chatbotcomponent component should be rendered', () => {
+  test('Chatbotcomponent component should be rendered', () => {
     const component = render(<App />);
     const childElement = component.findByTestId('Chatbotcomponent');
-    expect(childElement).toBeTruthy();
+    expect(childElement).toBeInTheDocument();
   });
 
-  test('full app rendering/navigating', async () => {
-    render(<App />, {wrapper: BrowserRouter})
-    const user = userEvent.setup()
+  test('When user is in index route(/) then render cards component ', () => {
+    window.history.pushState({}, '', '/');
 
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
 
-    // verify page content for default route
-    expect(screen.findAllByRole("Button")).toBeInTheDocument()
+    expect(screen.getByTestId('cards-component')).toBeInTheDocument();
+  });
 
+  test('When user is in card details route(/cartdetails/1) then render cards component ', () => {
+    window.history.pushState({}, '', '/cartdetails/1');
 
-    
-  // verify page content for expected route after navigating
-  await user.click(screen.getByText(/cartdetails/id//i)
-  
-  })
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByTestId('cards-details-component')).toBeInTheDocument();
+  });
+
+  test('When user is in card details route(/invoice) then render cards component ', () => {
+    window.history.pushState({}, '', '/invoice');
+
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByTestId('invoice-component')).toBeInTheDocument();
+  });
 });

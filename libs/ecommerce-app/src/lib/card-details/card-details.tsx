@@ -83,7 +83,7 @@ export const CardDetails = () => {
   return (
     <StyledCardDetails>
       <div className="container mt-2">
-        <h2 className="text-center">Items Details Page</h2>
+        <h2 className="text-center" data-testid="item-details-page">Items Details Page</h2>
 
         <section className="container mt-3">
           <StyledIteamsdetails>
@@ -93,7 +93,8 @@ export const CardDetails = () => {
                   <Styleditems_img>
                     <Styleditems_image
                       src={ele.imgdata}
-                      alt=""
+                      alt="Image Logo
+                      "
                     ></Styleditems_image>
                   </Styleditems_img>
                     
@@ -164,18 +165,7 @@ export const CardDetails = () => {
                           </p>
                         </td>
                       </tr>
-                      <ToastContainer
-                        position="top-center"
-                        autoClose={1000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme="light"
-                      />
+                     
                     </Table>
                   </StyledTable_details>
                 </>
