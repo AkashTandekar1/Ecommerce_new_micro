@@ -121,18 +121,21 @@ export const CardDetails = () => {
                           <StyledDelete_Img className="mt-5 d-flex justify-content-between align-items-center">
                             <span
                               style={{ fontSize: 24 }}
+                              data-testid="adding-item"
                               onClick={
                                 ele.qnty <= 1
                                   ? () => dlt(ele.id)
                                   : () => remove(ele)
+
                               }
                             >
                               -
                             </span>
-                            <span style={{ fontSize: 22 }}>{ele.qnty}</span>
+                            <span style={{ fontSize: 22 }} data-testid="quantity-data">{ele.qnty}</span>
                             <span
                               style={{ fontSize: 24 }}
                               onClick={() => send(ele)}
+                              data-testid="deleting-item"
                             >
                               +
                             </span>
@@ -154,6 +157,7 @@ export const CardDetails = () => {
                             <span>
                               <i
                                 className="fas fa-trash"
+                                data-testid="trash-icon"
                                 onClick={() => dlt(ele.id)}
                                 style={{
                                   color: 'red',

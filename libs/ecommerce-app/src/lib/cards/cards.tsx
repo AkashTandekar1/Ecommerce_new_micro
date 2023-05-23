@@ -38,7 +38,7 @@ export function Cards() {
 
   const send = (e: CardsProps) => {
     dispatch(ADD(e));
-    toast('Item has been added in the cart!');
+    toast('Item has been added in the cart!'); 
   };
 
   const [pageNumber, setPageNumber] = useState<number>(0);
@@ -113,6 +113,7 @@ export function Cards() {
           nextLinkClassName={'nextBttn'}
           disabledClassName={'paginationDisabled'}
           activeClassName={'paginationActive'}
+         
         />
       </StyledReactPaginate>
     </StyledCards>
