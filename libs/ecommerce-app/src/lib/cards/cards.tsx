@@ -70,7 +70,7 @@ export function Cards() {
             <Card.Body>
               <Card.Title>{res.rname}</Card.Title>
               <Card.Text>{res.somedata}</Card.Text>
-              <Button variant="primary" onClick={() => send(res)}>
+              <Button variant="primary" data-testid="custom-element" onClick={() => send(res)}>
                 Add to cart
               </Button>
             </Card.Body>
