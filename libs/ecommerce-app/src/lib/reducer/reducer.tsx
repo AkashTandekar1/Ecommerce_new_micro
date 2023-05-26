@@ -1,23 +1,10 @@
 import styled from 'styled-components';
 
-
+import {  Itemdata } from '../Interfaces/Itemdata.interface'
 const INIT_STATE   = {
-  carts: [] as ReducerProps[]
+  carts: [] as Itemdata[]
 } 
 
- 
- interface ReducerProps {
-  id: number;
-  rname?: string;
-  imgdata?: string;
-  address?: string;
-  delimg?: string;
-  somedata?: string;
-  price?: number;
-  rating?: string;
-  arrimg?: string;
-  qnty: number;
-}
 
 export const CartReducer = (state = INIT_STATE , action:any) => {
   switch (action.type) {

@@ -1,17 +1,6 @@
-interface itemdata {
-  id: number;
-  rname: string;
-  imgdata: string;
-  address: string;
-  delimg: string;
-  somedata: string;
-  price: number;
-  rating: string;
-  arrimg: string;
-  qnty: number;
-}
+import { Itemdata } from '../Interfaces/Itemdata.interface'
 
-export const ADD = (item: itemdata) => {
+export const ADD = (item: Itemdata) => {
   return {
     type: 'ADD_CART',
     payload: item,
@@ -25,7 +14,7 @@ export const DLT = (id:number) => {
   };
 };
 
-export const REMOVE = (iteam:itemdata) => {
+export const REMOVE = (iteam:Itemdata) => {
   return {
     type: 'RMV_ONE',
     payload: iteam,

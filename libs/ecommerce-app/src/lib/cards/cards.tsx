@@ -8,35 +8,20 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import { ADD } from '../action/action';
 import Cardsdata from '../cardsdata/CardsData';
+import {
+ 
+  Styled_pagination
+} from './cards.styles';
+import { Itemdata } from '../Interfaces/Itemdata.interface'
 
-
+import './cards.css'
 import 'react-toastify/dist/ReactToastify.css';
 
-export interface CardsProps {
-  id: number;
-  rname: string;
-  imgdata: string;
-  address: string;
-  delimg: string;
-  somedata: string;
-  price: number;
-  rating: string;
-  arrimg: string;
-  qnty: number;
-}
 
-const StyledCards = styled.div``;
-
-const StyleShowCards = styled.div``;
-const StyleShowCardsChildren = styled.div``;
-
-const Styledpagination = styled.div``;
-
-const StyledReactPaginate = styled.div``;
 export function Cards() {
   const dispatch = useDispatch();
 
-  const send = (e: CardsProps) => {
+  const send = (e:  Itemdata) => {
     dispatch(ADD(e));
     toast('Item has been added in the cart!'); 
   };
@@ -45,37 +30,36 @@ export function Cards() {
 
   const usersPerPage: number = 10;
   const pagesVisited: number = pageNumber * usersPerPage;
-
   const displayUsers = Cardsdata.slice(
     pagesVisited,
     pagesVisited + usersPerPage
   ).map((res, id) => {
     return (
-      <StyleShowCards>
-        <StyleShowCardsChildren>
+      <div>
+        <div>
           <Card
             key={id}
             style={{
-              width: '22rem',
-              border: 'none',
+              width: "22rem",
+              border: "none",
             }}
             className="mx-2 mt-4 card_style"
           >
             <Card.Img
               variant="top"
               src={res.imgdata}
-              style={{ height: '16rem' }}
+              style={{ height: "16rem" }}
               className="mt-3"
             />
             <Card.Body>
               <Card.Title>{res.rname}</Card.Title>
               <Card.Text>{res.somedata}</Card.Text>
-              <Button variant="primary" data-testid="custom-element" onClick={() => send(res)}>
+              <Button variant="primary" onClick={() => send(res)}>
                 Add to cart
               </Button>
             </Card.Body>
           </Card>
-        </StyleShowCardsChildren>
+        </div>
         <ToastContainer
           position="top-center"
           autoClose={1000}
@@ -88,7 +72,7 @@ export function Cards() {
           pauseOnHover
           theme="light"
         />
-      </StyleShowCards>
+      </div>
     );
   });
 
@@ -99,24 +83,22 @@ export function Cards() {
   };
 
   return (
-    <StyledCards>
-      <Styledpagination className="pagination">{displayUsers}</Styledpagination>
-
-      <StyledReactPaginate>
+    <div>
+      <Styled_pagination>{displayUsers}</Styled_pagination>
+      <div>
         <ReactPaginate
-          previousLabel={'Previous'}
-          nextLabel={'Next'}
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
           pageCount={pageCount}
           onPageChange={changePage}
-          containerClassName={'paginationBttns'}
-          previousLinkClassName={'previousBttn'}
-          nextLinkClassName={'nextBttn'}
-          disabledClassName={'paginationDisabled'}
-          activeClassName={'paginationActive'}
-         
+          containerClassName={"paginationBttns"}
+          previousLinkClassName={"previousBttn"}
+          nextLinkClassName={"nextBttn"}
+          disabledClassName={"paginationDisabled"}
+          activeClassName={"paginationActive"}
         />
-      </StyledReactPaginate>
-    </StyledCards>
+      </div>
+    </div>
   );
 }
 

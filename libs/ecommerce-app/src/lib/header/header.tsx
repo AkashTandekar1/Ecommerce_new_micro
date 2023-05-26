@@ -19,27 +19,11 @@ import styled from 'styled-components';
 
 import { DLT } from '../action/action';
 import Paymentgateway from '../payment-gateway/payment-gateway';
+import { StyledHeader,StyledHeaderTable } from './header.styles';
+import { Itemdata } from '../Interfaces/Itemdata.interface'
 
-export interface HeaderProps {
-  id: number;
-  rname: string;
-  imgdata: string;
-  address: string;
-  delimg: string;
-  somedata: string;
-  price: number;
-  rating: string;
-  arrimg: string;
-  qnty: number;
-}
 
-const StyledHeader = styled.div``;
 
-const StyledHeaderTable = styled.div`
-  width: 24rem;
-  padding: 10;
-  z-index: 999 !important;
-`;
 
 export const Header = () => {
   const getdata = useSelector((state:any) => state.CartReducer.carts);
@@ -95,7 +79,7 @@ export const Header = () => {
 
   const total = () => {
     let price: number = 0;
-    getdata.map((ele: HeaderProps, k: number) => {
+    getdata.map((ele: Itemdata, k: number) => {
       price = ele.price * ele.qnty + price;
     });
     setPrice(price);
@@ -109,7 +93,7 @@ export const Header = () => {
     <StyledHeader>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Shopping app</Navbar.Brand>
+          <Navbar.Brand href="#home" >Shopping app</Navbar.Brand>
           <Nav className="me-auto">
             <NavLink to="/" className="text-decoration-none text-light mx-3">
               Home
@@ -167,7 +151,7 @@ export const Header = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {getdata.map((e: HeaderProps) => {
+                      {getdata.map((e: Itemdata) => {
                         return (
                           <>
                             <tr>

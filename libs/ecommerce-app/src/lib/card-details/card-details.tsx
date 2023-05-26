@@ -11,48 +11,30 @@ import styled from 'styled-components';
 import { ADD, DLT, REMOVE } from '../action/action';
 
 import {
-  StyledCardDetails,
-  StyledDelete_Img,
   StyledIteamsdetails,
-  StyledRating_star,
-  StyledTable_details,
-  Styleditems_image,
-  Styleditems_img
+  Styled_items_img,
+  Styled_items_img_image,
+  Styled_details,
+  Styled_Action_button,
 } from './card-details.styles';
-
-export interface CardDetailsProps {
-  id: number;
-  rname: string;
-  imgdata: string;
-  address: string;
-  delimg: string;
-  somedata: string;
-  price: number;
-  rating: string;
-  arrimg: string;
-  qnty: number;
-}
-
-export interface akash {
-  id: number;
-}
+import { Itemdata } from '../Interfaces/Itemdata.interface';
 
 export const CardDetails = () => {
-  const [data, setData] = useState<CardDetailsProps[]>();
+  const [data, setData] = useState<Itemdata[]>();
 
-  const { id }= useParams();
+  const { id } = useParams();
   console.log('dgdfg' + id);
 
   const history = useNavigate();
 
   const dispatch = useDispatch();
 
-  const getdata: CardDetailsProps[] = useSelector(
-    (state:any) => state.CartReducer.carts
+  const getdata: Itemdata[] = useSelector(
+    (state: any) => state.CartReducer.carts
   );
 
   const compare = () => {
-    let comparedata:CardDetailsProps[] = getdata.filter((e:any) => {
+    let comparedata: Itemdata[] = getdata.filter((e: any) => {
       return e.id == id;
     });
 
@@ -60,7 +42,7 @@ export const CardDetails = () => {
     setData(comparedata);
   };
 
-  const send = (e: CardDetailsProps) => {
+  const send = (e: Itemdata) => {
     dispatch(ADD(e));
     toast('Item has been added in the cart!');
   };
@@ -71,7 +53,7 @@ export const CardDetails = () => {
     history('/');
   };
 
-  const remove = (item: CardDetailsProps) => {
+  const remove = (item: Itemdata) => {
     dispatch(REMOVE(item));
     toast('Item Deleted!');
   };
@@ -81,104 +63,124 @@ export const CardDetails = () => {
   }, [id]);
 
   return (
-    <StyledCardDetails>
-      <div className="container mt-2">
-        <h2 className="text-center" data-testid="item-details-page">Items Details Page</h2>
+    <div className="container mt-2">
+      <h2 className="text-center">Items Details Page</h2>
 
-        <section className="container mt-3">
-          <StyledIteamsdetails>
-            {data?.map((ele) => {
-              return (
-                <>
-                  <Styleditems_img>
-                    <Styleditems_image
-                      src={ele.imgdata}
-                      alt="Image Logo
-                      "
-                    ></Styleditems_image>
-                  </Styleditems_img>
-                    
-                  <StyledTable_details>
-                    <Table>
-                      <tr>
-                        <td>
-                          <p>
-                            {' '}
-                            <strong>Restaurant</strong> : {ele.rname}
-                          </p>
-                          <p>
-                            {' '}
-                            <strong>Price</strong> : ₹{ele.price}
-                          </p>
-                          <p>
-                            {' '}
-                            <strong>Dishes</strong> : {ele.address}
-                          </p>
-                          <p>
-                            {' '}
-                            <strong>Total</strong> :₹ {ele.price * ele.qnty}
-                          </p>
-                          <StyledDelete_Img className="mt-5 d-flex justify-content-between align-items-center">
-                            <span
-                              style={{ fontSize: 24 }}
-                              data-testid="adding-item"
-                              onClick={
-                                ele.qnty <= 1
-                                  ? () => dlt(ele.id)
-                                  : () => remove(ele)
+      <section className="container mt-3">
+        <StyledIteamsdetails>
+          {data?.map((ele) => {
+            return (
+              <>
+                <Styled_items_img>
+                  <Styled_items_img_image
+                    src={ele.imgdata}
+                    alt=""
+                  ></Styled_items_img_image>
+                </Styled_items_img>
 
-                              }
-                            >
-                              -
-                            </span>
-                            <span style={{ fontSize: 22 }} data-testid="quantity-data">{ele.qnty}</span>
-                            <span
-                              style={{ fontSize: 24 }}
-                              onClick={() => send(ele)}
-                              data-testid="deleting-item"
-                            >
-                              +
-                            </span>
-                          </StyledDelete_Img>
-                        </td>
-                        <td>
-                          <p>
-                            <strong>Rating :</strong>{' '}
-                            <StyledRating_star>
-                              {ele.rating} ★{' '}
-                            </StyledRating_star>
-                          </p>
-                          <p>
-                            <strong>Order Review :</strong>{' '}
-                            <span>{ele.somedata} </span>
-                          </p>
-                          <p>
-                            <strong>Remove :</strong>{' '}
-                            <span>
-                              <i
-                                className="fas fa-trash"
-                                data-testid="trash-icon"
-                                onClick={() => dlt(ele.id)}
-                                style={{
-                                  color: 'red',
-                                  fontSize: 20,
-                                  cursor: 'pointer',
-                                }}
-                              ></i>{' '}
-                            </span>
-                          </p>
-                        </td>
-                      </tr>
-                     
-                    </Table>
-                  </StyledTable_details>
-                </>
-              );
-            })}
-          </StyledIteamsdetails>
-        </section>
-      </div>
-    </StyledCardDetails>
+                <Styled_details>
+                  <Table>
+                    <tr>
+                      <td>
+                        <p>
+                          {' '}
+                          <strong>Restaurant</strong> : {ele.rname}
+                        </p>
+                        <p>
+                          {' '}
+                          <strong>Price</strong> : ₹{ele.price}
+                        </p>
+                        <p>
+                          {' '}
+                          <strong>Dishes</strong> : {ele.address}
+                        </p>
+                        <p>
+                          {' '}
+                          <strong>Total</strong> :₹ {ele.price * ele.qnty}
+                        </p>
+                        <Styled_Action_button className="mt-5 d-flex justify-content-between align-items-center"></Styled_Action_button>
+                        <div
+                          className="mt-5 d-flex justify-content-between align-items-center"
+                          style={{
+                            width: 100,
+                            cursor: 'pointer',
+                            background: '#ddd',
+                            color: '#111',
+                          }}
+                        >
+                          <span
+                            style={{ fontSize: 24 }}
+                            onClick={
+                              ele.qnty <= 1
+                                ? () => dlt(ele.id)
+                                : () => remove(ele)
+                            }
+                          >
+                            -
+                          </span>
+                          <span style={{ fontSize: 22 }}>{ele.qnty}</span>
+                          <span
+                            style={{ fontSize: 24 }}
+                            onClick={() => send(ele)}
+                          >
+                            +
+                          </span>
+                        </div>
+                      </td>
+                      <td>
+                        <p>
+                          <strong>Rating :</strong>{' '}
+                          <span
+                            style={{
+                              background: 'green',
+                              color: '#fff',
+                              padding: '2px 5px',
+                              borderRadius: '5px',
+                            }}
+                          >
+                            {ele.rating} ★{' '}
+                          </span>
+                        </p>
+                        <p>
+                          <strong>Order Review :</strong>{' '}
+                          <span>{ele.somedata} </span>
+                        </p>
+                        <p>
+                          <strong>Remove :</strong>{' '}
+                          <span>
+                            <i
+                              className="fas fa-trash"
+                              onClick={() => dlt(ele.id)}
+                              style={{
+                                color: 'red',
+                                fontSize: 20,
+                                cursor: 'pointer',
+                              }}
+                            ></i>{' '}
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+                    <ToastContainer
+                      position="top-center"
+                      autoClose={1000}
+                      hideProgressBar={false}
+                      newestOnTop={false}
+                      closeOnClick
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable
+                      pauseOnHover
+                      theme="light"
+                    />
+                  </Table>
+                </Styled_details>
+              </>
+            );
+          })}
+        </StyledIteamsdetails>
+      </section>
+    </div>
   );
 };
 

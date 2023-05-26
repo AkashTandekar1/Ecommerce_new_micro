@@ -3,39 +3,8 @@ import StripeCheckout from 'react-stripe-checkout';
 import styled from 'styled-components';
 import Emailing from '../emailing/emailing';
 
-export interface PaymentGatewayProps {
-  id: string;
-  object: string;
-  card: {
-    address_city?: string | null;
-    address_country?: string | null;
-    address_line?: string | null;
-    address_line1_check?: string | null;
-    address_line2: string | null;
-    address_state: string | null;
-    address_zip: string | null;
-    address_zip_check: string | null;
-    brand: string;
-    country: string;
-    cvc_check: string;
-    dynamic_last4: string | null;
-    exp_month: number;
-    exp_year: number;
-    funding: string;
-    id: string;
-    last4: number;
-    name: string;
-    object: string;
-    tokenization_method: string | null;
-    wallet?: string | null;
-  };
-  client_ip: string;
-  created: number;
-  email: string;
-  livemode: boolean;
-  type: string;
-  used: boolean;
-}
+import {  PaymentGatewayData } from '../Interfaces/Itemdata.interface'
+
 
 
 
@@ -44,11 +13,11 @@ export interface PaymentGatewayProps {
 
 const StyledPaymentGateway = styled.div``;
 
-export function PaymentGateway(props: PaymentGatewayProps) {
+export function PaymentGateway(props: PaymentGatewayData) {
   const [carddata, setcardData] = useState<string>('');
   const [success, setSucess] = useState<boolean>(false);
 
-  const onToken:any = (token: PaymentGatewayProps) => {
+  const onToken:any = (token: PaymentGatewayData) => {
     console.log('Token generated' + token);
 
     const {

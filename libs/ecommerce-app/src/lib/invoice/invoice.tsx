@@ -5,21 +5,10 @@ import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ReactToPrint from "react-to-print";
 import { StyledInvoiceContainer,StyledPrintContainer,StyledInvoiceBoxContainer,StyledTableContainer,
-  StyledTableData }
+  StyledTableData,StyledTable_Information_Td,StyledTable_Heading_Td,StyledTable_Item_Td,StyledTable_Total_Tr   }
  from './invoice.styles'
+ import { Itemdata } from '../Interfaces/Itemdata.interface'
 
-export interface InvoiceProps {
-  id: number;
-  rname: string;
-  imgdata: string;
-  address: string;
-  delimg: string;
-  somedata: string;
-  price: number;
-  rating: string;
-  arrimg: string;
-  qnty: number;
-}
 
 export default function Invoice() {
   let componentRef:any = useRef();
@@ -30,7 +19,7 @@ export default function Invoice() {
 
   const total = () => {
     let price = 0;
-    getdata.map((ele:InvoiceProps) => {
+    getdata.map((ele:Itemdata) => {
       price = ele.price * ele.qnty + price;
     });
     setPrice(price);
@@ -41,83 +30,88 @@ export default function Invoice() {
   }, [total]);
 
   return (
-     <StyledInvoiceContainer>
-          <StyledPrintContainer>
-        {/* <ReactToPrint
-          trigger={() => <Button>Click here to Print !</Button>}
-          content={() => componentRef}
-        /> */}
-         <ReactToPrint
+    <>
+      <StyledPrintContainer>
+        <ReactToPrint
           trigger={() => <Button>Click here to Print !</Button>}
           content={() => componentRef}
         />
-          </StyledPrintContainer>
+    </ StyledPrintContainer>
 
-     <StyledInvoiceBoxContainer ref={(el) => (componentRef = el)}>
-        <StyledTableContainer cellPadding="0" cellSpacing="0">
+      <StyledInvoiceBoxContainer ref={(el) => (componentRef = el)}>
+      
+      <StyledTableContainer cellPadding="0" cellSpacing="0">
+      
           <tr className="top">
-           <StyledTableData colSpan={2}>
-              <table>
+            <td colSpan={2}>
+             <StyledTableContainer>
                 <tr>
-                  <td className="title">
+                  <StyledTableData className="title">
+                 
                     <img
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpe6Zvk_Jqb4jjxUPMjZUBaIMGDIEqsKmGcw&usqp=CAU"
                       style={{ width: "100%", maxWidth: "300px" }}
                     />
-                  </td>
+                 </StyledTableData>
 
-                  <td>
+                 <StyledTableData className="title">
                     Invoice #: 123
                     <br />
                     Created: May 5, 2023
                     <br />
-                  </td>
+                    </StyledTableData>
                 </tr>
-              </table>
-              </StyledTableData>
+                </StyledTableContainer>
+            </td>
           </tr>
 
           <tr className="information">
             <td colSpan={2}>
-              <table>
+            <StyledTableContainer>
                 <tr>
-                  <td>
+                 <StyledTable_Information_Td>
                     <strong>Billing Address</strong>
                     <br />
                     Hinjewadi
                     <br />
                     Pune MH 12345
-                  </td>
+                    </StyledTable_Information_Td>
 
-                  <td>
+                    <StyledTable_Information_Td>
                     Akash Tandekar
                     <br />
                     akash@gmail.com
-                  </td>
+                    </StyledTable_Information_Td>
                 </tr>
-              </table>
+                </StyledTableContainer>
             </td>
           </tr>
 
           <tr className="heading">
-            <td>Items </td> <td>Price</td>
+            <StyledTable_Heading_Td >
+            Items
+            </StyledTable_Heading_Td>
+            <StyledTable_Heading_Td >
+            Price
+            </StyledTable_Heading_Td>
+          
           </tr>
 
-          {getdata.map((res:InvoiceProps) => (
+          {getdata.map((res:Itemdata) => (
             <div>
               <tr className="item last">
-                <td>{res.rname}</td>
-                <td>${res.price}</td>
+                <StyledTable_Item_Td>{res.rname}</StyledTable_Item_Td>
+                <StyledTable_Item_Td>${res.price}</StyledTable_Item_Td>
               </tr>
             </div>
           ))}
 
-          <tr className="total">
+           <StyledTable_Total_Tr>
             <td></td>
             <td>Total: {price}</td>
-          </tr>
+            </StyledTable_Total_Tr>
           </StyledTableContainer>
-     </StyledInvoiceBoxContainer>
-      </StyledInvoiceContainer>
+        </StyledInvoiceBoxContainer>
+   </>
   );
 }

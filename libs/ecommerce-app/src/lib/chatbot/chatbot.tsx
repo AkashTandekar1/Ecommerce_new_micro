@@ -4,19 +4,11 @@ import React from 'react';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 
-export interface ChatbotProps {}
+import { theme,StyledChatbot, StyledChatbotTheme } from './chatbot.syles'; 
 
-const StyledChatbot = styled.div``;
 
-const StyledChatbotTheme = styled.div`
-  background-color: brown;
 
-  width: 20%;
-  height: 20%;
-  float: right;
-`;
-
-export function Chatbot(props: ChatbotProps) {
+export function Chatbot() {
   const steps = [
     {
       id: 'Greet',
@@ -67,16 +59,6 @@ export function Chatbot(props: ChatbotProps) {
     },
   ];
 
-  const theme = {
-    background: '#C9FF8F',
-    headerBgColor: '#197B22',
-    headerFontSize: '20px',
-    botBubbleColor: '#0F3789',
-    headerFontColor: 'white',
-    botFontColor: 'white',
-    userBubbleColor: '#FF5733',
-    userFontColor: 'white',
-  };
 
   const config = {
     floating: true,

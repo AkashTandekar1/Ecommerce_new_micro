@@ -3,12 +3,13 @@ import emailjs, { send } from '@emailjs/browser';
 import React, { useEffect, useRef, useState } from 'react';
 import { useAccordionButton } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
+import { Styled_Emailing } from './emailing.styles';
 
-export interface EmailingProps {}
 
-const StyledEmailing = styled.div``;
 
-export function Emailing(props: EmailingProps) {
+
+
+export function Emailing() {
   const [data, setData] = useState<{
     name: string;
     email: string;
@@ -40,7 +41,7 @@ export function Emailing(props: EmailingProps) {
   console.log('email testing getting called');
 
   return (
-    <StyledEmailing>
+    <Styled_Emailing>
       <ToastContainer
         position="top-center"
         autoClose={1000}
@@ -53,7 +54,7 @@ export function Emailing(props: EmailingProps) {
         pauseOnHover
         theme="light"
       />
-    </StyledEmailing>
+    </Styled_Emailing>
   );
 }
 
